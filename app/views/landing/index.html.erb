@@ -1,9 +1,15 @@
 <ul>
   <% @articles.each do |article| %>
     <li>
-      <%= article.title %><br />
+      <%= article.title %><br/>
       <%= article.content %>
       <%= "Written by #{article.author} at #{article.created_at.strftime('%F')}" %>
+      <%= form_tag article_comment_path, id: "article_#{article.id}" do %>
+        <%= hidden_field_tag :article, article.id %>
+        <%= label_tag :comment %>
+        <%= text_field_tag :comment %>
+        <%= submit_tag 'Submit' %>
+      <% end %>
     </li>
   <% end %>
 </ul>
